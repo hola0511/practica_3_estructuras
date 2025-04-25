@@ -1,5 +1,9 @@
-import random
-from node import Node
+class Node:
+    def __init__(self, song):
+        self.song = song
+        self.next = None
+        self.prev = None
+
 
 class Playlist:
     def __init__(self):

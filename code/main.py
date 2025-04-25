@@ -1,10 +1,23 @@
 from playlist import Playlist
 from song import Song
-from utils import simulate_playback, shuffle_songs
+from utils import simulate_playback, shuffle_songs, simulate_single_song
 
 
 def main():
     playlist = Playlist()
+
+    canciones_iniciales = [
+        ("Bohemian Rhapsody", "Queen", 10),
+        ("Hotel California", "Eagles", 5),
+        ("Smells Like Teen Spirit", "Nirvana", 7),
+        ("Billie Jean", "Michael Jackson", 8),
+        ("Back in Black", "AC/DC", 6),
+        ("Sweet Child O' Mine", "Guns N' Roses", 10),
+        ("Lose Yourself", "Eminem", 8)
+    ]
+
+    for titulo, artista, duracion in canciones_iniciales:
+        playlist.add_song(Song(titulo, artista, duracion))
 
     while True:
         print("\n🎵 Bienvenido a tu Playlist Interactiva 🎵")
@@ -12,7 +25,7 @@ def main():
         print("2️⃣ Avanzar a la siguiente canción")
         print("3️⃣ Retroceder a la canción anterior")
         print("4️⃣ Eliminar una canción")
-        print("5️⃣ Mostrar canción en reproducción")
+        print("5️⃣ reproducir playlist")
         print("6️⃣ Mostrar toda la playlist")
         print("7️⃣ Activar modo aleatorio")
         print("8️⃣ Salir")
@@ -21,7 +34,7 @@ def main():
         if opcion == "1":
             title = input("Ingrese el título: ")
             artist = input("Ingrese el artista: ")
-            duration = int(input("Ingrese la duración (10-15 seg): "))
+            duration = int(input("Ingrese la duración: "))
             if playlist.add_song(Song(title, artist, duration)):
                 print("✅ Canción agregada exitosamente.")
             else:
@@ -50,8 +63,13 @@ def main():
                 print("❌ Canción no encontrada.")
 
         elif opcion == "5":
-            song = playlist.show_current()
-            print(f"🎧 {song}" if song else "🎧 No hay canciones en reproducción.")
+            print("\n🎶 Playlist Completa:")
+            for s in playlist.show_all():
+                print("   ", s)
+            if playlist.size == 0:
+                print("❌ No hay canciones para reproducir.")
+            else:
+                simulate_playback(playlist)
 
         elif opcion == "6":
             print("\n🎶 Playlist Completa:")
@@ -60,9 +78,12 @@ def main():
 
         elif opcion == "7":
             shuffled = shuffle_songs(playlist.get_songs_list())
+            print("\n🎶 Playlist Completa:")
+            for s in shuffled:
+                print("   ", s)
             print("🔀 Reproducción aleatoria:")
             for song in shuffled:
-                simulate_playback(song)
+                simulate_single_song(song)
 
         elif opcion == "8":
             print("👋 ¡Hasta pronto!")
