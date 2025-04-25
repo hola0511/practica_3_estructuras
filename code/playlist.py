@@ -30,7 +30,7 @@ class Playlist:
         node = self.current
         if not node:
             return False
-        for _ in range(self.size):
+        for i in range(self.size):
             if node.song.title.lower() == title.lower():
                 return True
             node = node.next
@@ -48,7 +48,7 @@ class Playlist:
         if not self.current:
             return False
         node = self.current
-        for _ in range(self.size):
+        for i in range(self.size):
             if node.song.title.lower() == title.lower():
                 if self.size == 1:
                     self.current = None
@@ -70,7 +70,7 @@ class Playlist:
         node = self.current
         if not node:
             return songs
-        for _ in range(self.size):
+        for i in range(self.size):
             songs.append(str(node.song))
             node = node.next
         return songs
@@ -79,32 +79,7 @@ class Playlist:
         songs = []
         node = self.current
         if node:
-            for _ in range(self.size):
+            for i in range(self.size):
                 songs.append(node.song)
                 node = node.next
         return songs
-
-
-
-
-#agregela a la funcion Playlist
-#def top_3_largas(self):
- #   if self.size == 0:
-  #      return []
-#
- #   # Obtener todas las canciones como lista
-  #  canciones = self.get_songs_list()
-#
-  #  top3 = sorted(canciones, key=lambda song: song.duration, reverse=True)[:3]
-#
- #   return top3
-
-#agrege en el menu
-#elif opcion == "9":
- #   top = playlist.top_3_largas()
-  #  if not top:
-   #     print("❌ No hay canciones en la playlist.")
-    #else:
-     #   print("\n🥇 Top 3 canciones más largas:")
-      #  for idx, song in enumerate(top, start=1):
-       #     print(f"{idx}. {song}")

@@ -1,6 +1,6 @@
 from playlist import Playlist
 from song import Song
-from utils import simulate_playback, shuffle_songs, simulate_single_song
+from utils import simulate_playback, shuffle_songs, simulate_single_song, eliminar_artista_menos_frecuente
 
 
 def main():
@@ -8,12 +8,14 @@ def main():
 
     canciones_iniciales = [
         ("Bohemian Rhapsody", "Queen", 10),
-        ("Hotel California", "Eagles", 5),
+        ("Hotel California", "Queen", 5),
         ("Smells Like Teen Spirit", "Nirvana", 7),
         ("Billie Jean", "Michael Jackson", 8),
-        ("Back in Black", "AC/DC", 6),
+        ("Come as You Are", "Nirvana", 6),
         ("Sweet Child O' Mine", "Guns N' Roses", 10),
-        ("Lose Yourself", "Eminem", 8)
+        ("Lose Yourself", "Eminem", 8),
+        ("November Rain", "Guns N' Roses", 10),
+        ("Whitout me", "Eminem", 8)
     ]
 
     for titulo, artista, duracion in canciones_iniciales:
@@ -29,6 +31,7 @@ def main():
         print("6️⃣ Mostrar toda la playlist")
         print("7️⃣ Activar modo aleatorio")
         print("8️⃣ Salir")
+        print("9️⃣ Eliminar canciones del artista con menos cancion")
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
@@ -88,6 +91,10 @@ def main():
         elif opcion == "8":
             print("👋 ¡Hasta pronto!")
             break
+
+        elif opcion == "9":
+            print("\n Se eliminara el artista con menos canciones")
+            eliminar_artista_menos_frecuente(playlist)
 
         else:
             print("❌ Opción inválida.")
